@@ -1,559 +1,154 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Polling Lomba Menggambar dan Mewarnai Pesta Gotilon 2025</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-  /* Color theme: dark red to orange */
-  html, body {
-    margin: 0; padding: 0; height: 100%;
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(135deg, #6b0a0a 0%, #ff6f00 100%);
-    color: #fff;
-  }
-  body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  header {
-    text-align: center;
-    padding: 1.5rem 1rem;
-    font-weight: 700;
-    font-size: 1.6rem;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-  }
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0 1rem 1rem;
-    max-width: 480px;
-    margin: 0 auto 1rem;
-  }
-  section {
-    background: rgba(255 111 0 / 0.15);
-    padding: 1rem 1.2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  }
-  h2 {
-    margin-top: 0;
-    font-weight: 700;
-    margin-bottom: 0.8rem;
-    text-align: center;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-  }
-  label {
-    display: block;
-    margin: 0.7rem 0 0.3rem;
-    font-weight: 600;
-  }
-  input[type="text"], input[type="password"], select {
-    width: 100%;
-    padding: 0.5rem 0.6rem;
-    border-radius: 6px;
-    border: none;
-    font-size: 1rem;
-    font-weight: 400;
-    outline-offset: 2px;
-    outline-color: #ff6f00;
-  }
-  button {
-    margin-top: 1rem;
-    width: 100%;
-    background: #b23105;
-    border: none;
-    border-radius: 8px;
-    padding: 0.7rem;
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    box-shadow: 0px 5px 8px rgba(255 111 0 / 0.7);
-    transition: background 0.3s ease;
-  }
-  button:hover,
-  button:focus {
-    background: #ff6f00;
-  }
-  select {
-    cursor: pointer;
-  }
-  .hidden {
-    display: none !important;
-  }
-  .results-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 0.6rem;
-  }
-  .results-table th, .results-table td {
-    border: 1px solid rgba(255 255 255 / 0.4);
-    padding: 0.4rem 0.7rem;
-    text-align: center;
-  }
-  .results-table th {
-    background-color: rgba(183 83 5 / 0.6);
-  }
-  .token-list {
-    max-height: 180px;
-    overflow-y: auto;
-    background: rgba(255 255 255 / 0.12);
-    border-radius: 8px;
-    padding: 0.6rem 0.8rem;
-    font-size: 0.9rem;
-    font-family: monospace;
-  }
-  .token-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.2rem 0.4rem;
-    border-bottom: 1px solid rgba(255 255 255 / 0.15);
-  }
-  .token-item:last-child {
-    border-bottom: none;
-  }
-  .used {
-    color: #ffa86b;
-    font-weight: 700;
-  }
-  .unused {
-    color: #a3ff6a;
-    font-weight: 700;
-  }
-  .message {
-    margin-top: 0.8rem;
-    font-weight: 600;
-    text-align: center;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-  }
-  footer {
-    text-align: center;
-    padding: 0.8rem 0;
-    font-size: 0.85rem;
-    color: rgba(255 255 255 / 0.6);
-  }
-  /* Responsive */
-  @media (max-width: 520px) {
-    main {
-      max-width: 95vw;
-      padding: 0 0.5rem 1rem;
-    }
-  }
-</style>
-</head>
-<body>
-<header>
-  Polling Lomba Menggambar dan Mewarnai Pesta Gotilon 2025
-</header>
-<main>
-  <!-- Respondent Section -->
-  <section id="respondent-section">
-    <h2>Voting Responden</h2>
-    <div id="respondent-start">
-      <label for="token-input">Masukkan Token:</label>
-      <input type="text" id="token-input" maxlength="8" autocomplete="off" spellcheck="false" placeholder="Token Anda" />
-      <button id="token-verify-btn">Verifikasi Token</button>
-      <div class="message" id="token-message"></div>
-    </div>
+   <!DOCTYPE html>
+   <html lang="id">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Polling Lomba Menggambar dan Mewarnai Pesta Gotilon 2025</title>
+       <style>
+           body {
+               font-family: Arial, sans-serif;
+               background: linear-gradient(135deg, #6b0a0a, #ff6f00);
+               color: white;
+               padding: 20px;
+           }
+           header {
+               text-align: center;
+               margin-bottom: 20px;
+           }
+           section {
+               margin-bottom: 20px;
+               padding: 20px;
+               background: rgba(255, 255, 255, 0.1);
+               border-radius: 10px;
+           }
+           button {
+               padding: 10px 15px;
+               background: #b23105;
+               border: none;
+               border-radius: 5px;
+               color: white;
+               cursor: pointer;
+           }
+           button:hover {
+               background: #ff6f00;
+           }
+           .hidden {
+               display: none;
+           }
+       </style>
+   </head>
+   <body>
+       <header>
+           <h1>Polling Lomba Menggambar dan Mewarnai Pesta Gotilon 2025</h1>
+       </header>
+       <main>
+           <section id="respondent-section">
+               <h2>Voting Responden</h2>
+               <input type="text" id="token-input" placeholder="Masukkan Token">
+               <button id="token-verify-btn">Verifikasi Token</button>
+               <div id="token-message"></div>
+               <div id="contest-choice" class="hidden">
+                   <h3>Pilih Lomba</h3>
+                   <select id="contest-select">
+                       <option value="" disabled selected>-- Pilih Lomba --</option>
+                       <option value="Mewarnai">Mewarnai</option>
+                       <option value="Menggambar">Menggambar</option>
+                   </select>
+                   <h4>Pilih Sektor</h4>
+                   <select id="sector-select">
+                       <option value="" disabled selected>-- Pilih Sektor --</option>
+                       <option value="Sektor 1">Sektor 1</option>
+                       <option value="Sektor 2">Sektor 2</option>
+                       <option value="Sektor 3">Sektor 3</option>
+                       <option value="Sektor 4">Sektor 4</option>
+                       <option value="Sektor 5">Sektor 5</option>
+                       <option value="Sektor 6">Sektor 6</option>
+                       <option value="Sektor 7">Sektor 7</option>
+                   </select>
+                   <button id="vote-submit-btn">Submit Vote</button>
+                   <div id="vote-message"></div>
+               </div>
+           </section>
+           <section id="admin-section">
+               <h2>Panel Admin</h2>
+               <input type="password" id="admin-password-input" placeholder="Password Admin">
+               <button id="admin-login-btn">Login</button>
+               <div id="admin-login-message"></div>
+               <div id="admin-panel" class="hidden">
+                   <button id="generate-token-btn">Buat Token Baru</button>
+                   <button id="get-tokens-btn">Dapatkan Token</button>
+                   <div id="token-list"></div>
+                   <button id="get-results-btn">Dapatkan Hasil Voting</button>
+                   <div id="results-list"></div>
+                   <button id="admin-logout-btn">Logout</button>
+               </div>
+           </section>
+       </main>
+       <script>
+           const API_URL = 'http://localhost:5000/api';
 
-    <!-- Contest choice after token verified -->
-    <div id="contest-choice" class="hidden">
-      <label>Pilih Lomba yang Ingin Dipoling:</label>
-      <select id="contest-select" aria-label="Pilih Lomba">
-        <option value="" disabled selected>-- Pilih Lomba --</option>
-        <option value="Mewarnai">Mewarnai</option>
-        <option value="Menggambar">Menggambar</option>
-      </select>
-      <button id="contest-next-btn" disabled>Pilih Sektor</button>
-      <button id="contest-back-btn" class="small-btn" style="margin-top: 0.5rem; background: #a33a00;">Kembali</button>
-      <div class="message" id="contest-message"></div>
-    </div>
+           document.getElementById('token-verify-btn').addEventListener('click', async () => {
+               const token = document.getElementById('token-input').value;
+               const response = await fetch(`${API_URL}/tokens`);
+               const tokens = await response.json();
+               const validToken = tokens.find(t => t.token === token && !t.used);
+               if (validToken) {
+                   document.getElementById('token-message').textContent = 'Token valid!';
+                   document.getElementById('contest-choice').classList.remove('hidden');
+               } else {
+                   document.getElementById('token-message').textContent = 'Token tidak valid atau sudah digunakan.';
+               }
+           });
 
-    <!-- Sector vote after contest selected -->
-    <div id="sector-vote" class="hidden">
-      <label>Pilih Sektor untuk Voting:</label>
-      <select id="sector-select" aria-label="Pilih Sektor">
-        <option value="" disabled selected>-- Pilih Sektor --</option>
-        <option value="Sektor 1">Sektor 1</option>
-        <option value="Sektor 2">Sektor 2</option>
-        <option value="Sektor 3">Sektor 3</option>
-        <option value="Sektor 4">Sektor 4</option>
-        <option value="Sektor 5">Sektor 5</option>
-        <option value="Sektor 6">Sektor 6</option>
-        <option value="Sektor 7">Sektor 7</option>
-      </select>
-      <button id="vote-submit-btn" disabled>Submit Vote</button>
-      <button id="sector-back-btn" class="small-btn" style="margin-top: 0.5rem; background: #a33a00;">Kembali</button>
-      <div class="message" id="vote-message"></div>
-    </div>
-  </section>
+           document.getElementById('vote-submit-btn').addEventListener('click', async () => {
+               const token = document.getElementById('token-input').value;
+               const contest = document.getElementById('contest-select').value;
+               const sector = document.getElementById('sector-select').value;
+               const response = await fetch(`${API_URL}/vote`, {
+                   method: 'POST',
+                   headers: { 'Content-Type': 'application/json' },
+                   body: JSON.stringify({ token, contest, sector })
+               });
+               const result = await response.json();
+               document.getElementById('vote-message').textContent = result.message || 'Vote berhasil!';
+           });
 
-  <!-- Admin Section -->
-  <section id="admin-section">
-    <h2>Panel Admin</h2>
-    <!-- Login form -->
-    <div id="admin-login">
-      <label for="admin-password-input">Masukkan Password Admin:</label>
-      <input type="password" id="admin-password-input" autocomplete="off" spellcheck="false" placeholder="Password Admin" />
-      <button id="admin-login-btn">Login</button>
-      <div class="message" id="admin-login-message"></div>
-    </div>
+           document.getElementById('admin-login-btn').addEventListener('click', async () => {
+               const password = document.getElementById('admin-password-input').value;
+               if (password === 'semutsektor32025') {
+                   document.getElementById('admin-panel').classList.remove('hidden');
+                   document.getElementById('admin-login-message').textContent = '';
+               } else {
+                   document.getElementById('admin-login-message').textContent = 'Password salah.';
+               }
+           });
 
-    <!-- Admin panel after login -->
-    <div id="admin-panel" class="hidden">
-      <button id="admin-logout-btn" style="background: #8b0000; margin-bottom: 1rem;">Logout</button>
+           document.getElementById('generate-token-btn').addEventListener('click', async () => {
+               const token = Math.random().toString(36).substring(2, 10).toUpperCase();
+               await fetch(`${API_URL}/tokens`, {
+                   method: 'POST',
+                   headers: { 'Content-Type': 'application/json' },
+                   body: JSON.stringify({ token })
+               });
+               alert(`Token baru: ${token}`);
+           });
 
-      <!-- Voting Results -->
-      <div id="voting-results">
-        <h3>Hasil Poling</h3>
-        <table class="results-table" aria-label="Hasil Poling">
-          <thead>
-            <tr>
-              <th>Lomba</th>
-              <th>Sektor 1</th>
-              <th>Sektor 2</th>
-              <th>Sektor 3</th>
-              <th>Sektor 4</th>
-              <th>Sektor 5</th>
-              <th>Sektor 6</th>
-              <th>Sektor 7</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr id="result-row-Mewarnai">
-              <td>Mewarnai</td>
-              <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
-            </tr>
-            <tr id="result-row-Menggambar">
-              <td>Menggambar</td>
-              <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+           document.getElementById('get-tokens-btn').addEventListener('click', async () => {
+               const response = await fetch(`${API_URL}/tokens`);
+               const tokens = await response.json();
+               document.getElementById('token-list').innerHTML = tokens.map(t => `<div>${t.token} - ${t.used ? 'Sudah dipakai' : 'Belum dipakai'}</div>`).join('');
+           });
 
-      <!-- Token management -->
-      <div id="token-management" style="margin-top: 1rem;">
-        <h3>Manajemen Token</h3>
-        <button id="generate-token-btn">Buat Token Baru</button>
-        <div class="token-list" aria-live="polite" aria-relevant="additions removals" id="token-list"></div>
-      </div>
-    </div>
-  </section>
-</main>
-<footer>
-  &copy; 2025 Pesta Gotilon Voting
-</footer>
+           document.getElementById('get-results-btn').addEventListener('click', async () => {
+               const response = await fetch(`${API_URL}/results`);
+               const results = await response.json();
+               document.getElementById('results-list').innerHTML = results.map(r => `<div>${r._id.contest} - ${r._id.sector}: ${r.count}</div>`).join('');
+           });
 
-<script>
-(() => {
-  // CONSTANTS
-  const ADMIN_PASSWORD = "semutsektor32025";
-  const LOCALSTORAGE_TOKENS_KEY = "gotilon_tokens";
-  const LOCALSTORAGE_VOTES_KEY = "gotilon_votes";
-  const tokenInput = document.getElementById("token-input");
-  const tokenVerifyBtn = document.getElementById("token-verify-btn");
-  const tokenMessage = document.getElementById("token-message");
-
-  const contestChoiceDiv = document.getElementById("contest-choice");
-  const contestSelect = document.getElementById("contest-select");
-  const contestNextBtn = document.getElementById("contest-next-btn");
-  const contestBackBtn = document.getElementById("contest-back-btn");
-  const contestMessage = document.getElementById("contest-message");
-
-  const sectorVoteDiv = document.getElementById("sector-vote");
-  const sectorSelect = document.getElementById("sector-select");
-  const voteSubmitBtn = document.getElementById("vote-submit-btn");
-  const sectorBackBtn = document.getElementById("sector-back-btn");
-  const voteMessage = document.getElementById("vote-message");
-
-  const respondentStartDiv = document.getElementById("respondent-start");
-
-  // Admin elements
-  const adminPasswordInput = document.getElementById("admin-password-input");
-  const adminLoginBtn = document.getElementById("admin-login-btn");
-  const adminLoginMessage = document.getElementById("admin-login-message");
-
-  const adminLoginDiv = document.getElementById("admin-login");
-  const adminPanelDiv = document.getElementById("admin-panel");
-  const adminLogoutBtn = document.getElementById("admin-logout-btn");
-
-  const tokenListDiv = document.getElementById("token-list");
-  const resultRowMewarnai = document.getElementById("result-row-Mewarnai");
-  const resultRowMenggambar = document.getElementById("result-row-Menggambar");
-
-  // State
-  let tokens = [];
-  let votes = { Mewarnai: {}, Menggambar: {} };
-  let currentToken = null;
-  let currentContest = null;
-  let isAdminLoggedIn = false;
-
-  // Initialize votes structure with 0s for Sektor 1~7
-  function initVotes() {
-    ["Mewarnai", "Menggambar"].forEach(lomba => {
-      if (!votes[lomba]) votes[lomba] = {};
-      for (let i=1; i<=7; i++) {
-        if (typeof votes[lomba]["Sektor "+i] !== "number") {
-          votes[lomba]["Sektor "+i] = 0;
-        }
-      }
-    });
-  }
-
-  // Save tokens to localStorage
-  function saveTokens() {
-    localStorage.setItem(LOCALSTORAGE_TOKENS_KEY, JSON.stringify(tokens));
-  }
-
-  // Load tokens from localStorage
-  function loadTokens() {
-    let t = localStorage.getItem(LOCALSTORAGE_TOKENS_KEY);
-    if (t) {
-      try {
-        tokens = JSON.parse(t);
-        if (!Array.isArray(tokens)) tokens = [];
-      } catch {
-        tokens = [];
-      }
-    } else {
-      tokens = [];
-    }
-  }
-
-  // Save votes to localStorage
-  function saveVotes() {
-    localStorage.setItem(LOCALSTORAGE_VOTES_KEY, JSON.stringify(votes));
-  }
-
-  // Load votes from localStorage
-  function loadVotes() {
-    let v = localStorage.getItem(LOCALSTORAGE_VOTES_KEY);
-    if (v) {
-      try {
-        votes = JSON.parse(v);
-      } catch {
-        votes = {};
-      }
-    } else {
-      votes = {};
-    }
-    initVotes();
-  }
-
-  // Generate a random 8-character token (alphanumeric uppercase)
-  function generateToken() {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let token = "";
-    for (let i=0; i<8; i++) {
-      token += chars.charAt(Math.floor(Math.random()*chars.length));
-    }
-    // Ensure token is unique
-    if (tokens.find(t => t.token === token)) return generateToken();
-    return token;
-  }
-
-  // Render tokens list for admin
-  function renderTokens() {
-    if (tokens.length === 0) {
-      tokenListDiv.textContent = "(Belum ada token dibuat)";
-      return;
-    }
-    tokenListDiv.innerHTML = "";
-    tokens.forEach(({token, used}) => {
-      let div = document.createElement("div");
-      div.className = "token-item";
-      let textSpan = document.createElement("span");
-      textSpan.textContent = token;
-      let statusSpan = document.createElement("span");
-      statusSpan.textContent = used ? "Sudah dipakai" : "Belum dipakai";
-      statusSpan.className = used ? "used" : "unused";
-      div.appendChild(textSpan);
-      div.appendChild(statusSpan);
-      tokenListDiv.appendChild(div);
-    });
-  }
-
-  // Render voting results for admin
-  function renderResults() {
-    for (let i=1; i<=7; i++) {
-      // Mewarnai row columns
-      let cellM = resultRowMewarnai.children[i];
-      cellM.textContent = votes.Mewarnai["Sektor "+i] || 0;
-      // Menggambar row columns
-      let cellG = resultRowMenggambar.children[i];
-      cellG.textContent = votes.Menggambar["Sektor "+i] || 0;
-    }
-  }
-
-  // Reset respondent interface to initial
-  function resetRespondent() {
-    currentToken = null;
-    currentContest = null;
-    tokenInput.value = "";
-    tokenMessage.textContent = "";
-    contestMessage.textContent = "";
-    voteMessage.textContent = "";
-    contestSelect.value = "";
-    contestNextBtn.disabled = true;
-    sectorSelect.value = "";
-    voteSubmitBtn.disabled = true;
-    // Show token input form, hide others
-    respondentStartDiv.classList.remove("hidden");
-    contestChoiceDiv.classList.add("hidden");
-    sectorVoteDiv.classList.add("hidden");
-  }
-
-  // Respondent handlers
-  tokenVerifyBtn.addEventListener("click", () => {
-    const tokenValue = tokenInput.value.trim().toUpperCase();
-    if (tokenValue.length === 0) {
-      tokenMessage.textContent = "Token tidak boleh kosong.";
-      return;
-    }
-    // Check if token exists and unused
-    const tokenObj = tokens.find(t => t.token === tokenValue);
-    if (!tokenObj) {
-      tokenMessage.textContent = "Token tidak valid.";
-      return;
-    }
-    if (tokenObj.used) {
-      tokenMessage.textContent = "Token sudah digunakan. Tidak bisa voting lagi.";
-      return;
-    }
-    // Valid token
-    currentToken = tokenValue;
-    tokenMessage.textContent = "";
-    // Show contest choice
-    respondentStartDiv.classList.add("hidden");
-    contestChoiceDiv.classList.remove("hidden");
-  });
-
-  contestSelect.addEventListener("change", () => {
-    contestNextBtn.disabled = (contestSelect.value === "");
-    contestMessage.textContent = "";
-  });
-
-  contestNextBtn.addEventListener("click", () => {
-    const contest = contestSelect.value;
-    if (!contest) {
-      contestMessage.textContent = "Silakan pilih lomba terlebih dahulu.";
-      return;
-    }
-    currentContest = contest;
-    contestChoiceDiv.classList.add("hidden");
-    sectorVoteDiv.classList.remove("hidden");
-  });
-
-  contestBackBtn.addEventListener("click", () => {
-    contestChoiceDiv.classList.add("hidden");
-    respondentStartDiv.classList.remove("hidden");
-    contestSelect.value = "";
-    contestNextBtn.disabled = true;
-    contestMessage.textContent = "";
-  });
-
-  sectorSelect.addEventListener("change", () => {
-    voteSubmitBtn.disabled = (sectorSelect.value === "");
-    voteMessage.textContent = "";
-  });
-
-  voteSubmitBtn.addEventListener("click", () => {
-    const sector = sectorSelect.value;
-    if (!sector) {
-      voteMessage.textContent = "Silakan pilih sektor terlebih dahulu.";
-      return;
-    }
-    // Register the vote
-    if (!votes[currentContest]) votes[currentContest] = {};
-    if (!votes[currentContest][sector]) votes[currentContest][sector] = 0;
-    votes[currentContest][sector]++;
-    saveVotes();
-
-    // Mark token as used
-    const tokenObj = tokens.find(t => t.token === currentToken);
-    if (tokenObj) {
-      tokenObj.used = true;
-      saveTokens();
-    }
-
-    alert(`Terima kasih! Voting Anda pada lomba "${currentContest}" sektor "${sector}" telah tercatat.`);
-    // Reset respondent interface for next user
-    resetRespondent();
-  });
-
-  sectorBackBtn.addEventListener("click", () => {
-    sectorVoteDiv.classList.add("hidden");
-    contestChoiceDiv.classList.remove("hidden");
-    sectorSelect.value = "";
-    voteSubmitBtn.disabled = true;
-    voteMessage.textContent = "";
-  });
-
-  // Admin handlers
-  function adminLogin() {
-    const pw = adminPasswordInput.value;
-    if (pw === ADMIN_PASSWORD) {
-      isAdminLoggedIn = true;
-      adminLoginDiv.classList.add("hidden");
-      adminPanelDiv.classList.remove("hidden");
-      adminLoginMessage.textContent = "";
-      adminPasswordInput.value = "";
-      refreshAdminUI();
-    } else {
-      adminLoginMessage.textContent = "Password salah.";
-    }
-  }
-  adminLoginBtn.addEventListener("click", adminLogin);
-  adminPasswordInput.addEventListener("keypress", e => {
-    if (e.key === 'Enter') adminLogin();
-  });
-
-  adminLogoutBtn.addEventListener("click", () => {
-    isAdminLoggedIn = false;
-    adminPanelDiv.classList.add("hidden");
-    adminLoginDiv.classList.remove("hidden");
-    adminLoginMessage.textContent = "";
-  });
-
-  function refreshAdminUI() {
-    renderResults();
-    renderTokens();
-  }
-
-  // Admin generate token button
-  document.getElementById("generate-token-btn").addEventListener("click", () => {
-    const newToken = generateToken();
-    tokens.push({ token: newToken, used: false });
-    saveTokens();
-    renderTokens();
-    alert("Token baru berhasil dibuat:\n" + newToken);
-  });
-
-  // Initialization on load
-  function initialize() {
-    loadTokens();
-    loadVotes();
-    initVotes();
-    resetRespondent();
-    if (isAdminLoggedIn) {
-      adminLoginDiv.classList.add("hidden");
-      adminPanelDiv.classList.remove("hidden");
-      refreshAdminUI();
-    } else {
-      adminLoginDiv.classList.remove("hidden");
-      adminPanelDiv.classList.add("hidden");
-    }
-  }
-
-  initialize();
-})();
-</script>
-</body>
-</html>
-
+           document.getElementById('admin-logout-btn').addEventListener('click', () => {
+               document.getElementById('admin-panel').classList.add('hidden');
+           });
+       </script>
+   </body>
+   </html>
+   
