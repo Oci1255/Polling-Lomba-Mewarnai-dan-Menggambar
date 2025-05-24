@@ -5,499 +5,619 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Polling Lomba Menggambar dan Mewarnai Pesta Gotilon 2025</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
   body {
-    margin: 0; padding: 0;
+    margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #7b0000, #ff6500);
-    color: #fff;
+    background: linear-gradient(135deg, #7f0000, #ff6300);
+    color: #fff8f0;
     min-height: 100vh;
-    display: flex; justify-content: center; align-items: center;
-  }
-  #container {
-    background: #2c0505dd;
-    border-radius: 12px;
-    max-width: 900px;
-    width: 95vw;
-    box-shadow: 0 0 20px #ff5d00cc;
-    padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    padding: 1rem;
   }
   h1 {
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+    font-size: 1.8rem;
     text-align: center;
-    margin-bottom: 10px;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    text-shadow: 1px 1px 6px #ff650085;
+    text-shadow: 1px 1px 4px #0008;
   }
-
-  /* Columns: top = voting, bottom = admin */
-  #votingSection, #adminSection {
-    background: #440a0a;
-    border-radius: 10px;
-    padding: 15px 20px;
-    box-shadow: 0 0 10px #ff650099;
-  }
-
-  /* Voting Section */
-  #tokenInputGroup {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin-bottom: 15px;
-  }
-  #tokenInputGroup input[type="text"] {
-    flex: 1;
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: none;
-    font-size: 1rem;
-  }
-  #tokenInputGroup button {
-    background: #ff6500;
-    border: none;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  #tokenInputGroup button:hover {
-    background: #cc5200;
-  }
-  #pollingChoice, #sectorChoice {
-    display: none;
-    margin-top: 10px;
-    text-align: center;
-  }
-  #pollingChoice button, #sectorChoice button {
-    background: #ff6500;
-    border: none;
-    color: white;
-    padding: 10px 18px;
-    margin: 6px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    min-width: 110px;
-    transition: background-color 0.3s ease;
-  }
-  #pollingChoice button:hover, #sectorChoice button:hover {
-    background: #cc5200;
-  }
-  #message {
-    text-align: center;
-    margin-top: 8px;
-    font-weight: 600;
-    min-height: 22px;
-  }
-
-  /* Admin Section */
-  #adminLoginForm, #adminPanel {
-    max-width: 480px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  #adminLoginForm input[type="password"] {
-    width: 70%;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: none;
-    font-size: 1rem;
-    margin-bottom: 10px;
-  }
-  #adminLoginForm button {
-    background: #ff6500;
-    border: none;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-left: 5px;
-    transition: background-color 0.3s ease;
-  }
-  #adminLoginForm button:hover {
-    background: #cc5200;
-  }
-  #adminPanel button {
-    background: #ff6500;
-    border: none;
-    color: white;
-    padding: 8px 14px;
-    margin: 6px 5px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  #adminPanel button:hover {
-    background: #cc5200;
-  }
-  #adminPanel table {
+  #container {
     width: 100%;
+    max-width: 460px;
+    background-color: #4a0f02cc;
+    border-radius: 12px;
+    box-shadow: 0 0 16px #ff630080;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    user-select: none;
+  }
+  .section {
+    background: #6e180012;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: inset 0 0 6px #ff630080;
+  }
+
+  /* Respondent area */
+  #respondent-section h2 {
+    margin: 0 0 1rem 0;
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-align: center;
+    text-shadow: 1px 1px 3px #0008;
+  }
+  #respondent-token-form,
+  #respondent-vote-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  input[type=text] {
+    width: 80%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+  }
+  button {
+    cursor: pointer;
+    background: #ff6300;
+    border: none;
+    color: #fff8f0;
+    font-weight: 600;
+    padding: 0.55rem 1.25rem;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 8px #ff6300dd;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  button:hover:not(:disabled) {
+    background: #ff9922;
+    box-shadow: 0 0 14px #ff9922cc;
+  }
+  button:disabled {
+    background: #7a3b00aa;
+    cursor: default;
+    box-shadow: none;
+  }
+  label {
+    font-weight: 500;
+    user-select: none;
+  }
+  select {
+    width: 90%;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+  }
+
+  /* Admin area */
+  #admin-section h2 {
+    margin: 0 0 1rem 0;
+    font-weight: 600;
+    font-size: 1.3rem;
+    text-align: center;
+    text-shadow: 1px 1px 3px #0008;
+  }
+  #admin-login-form,
+  #admin-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  input[type=password] {
+    width: 80%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+  }
+  #tokens-list {
+    max-height: 150px;
+    overflow-y: auto;
+    width: 100%;
+    background: #7f240044;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    box-shadow: inset 0 0 7px #ff630099;
+  }
+  #tokens-list ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    list-style-type: disc;
+    line-height: 1.3;
+  }
+  #results-table {
     border-collapse: collapse;
-    margin-top: 15px;
-    color: #fff;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  #results-table th, #results-table td {
+    border: 1px solid #ff630088;
+    padding: 6px 8px;
+    text-align: center;
     font-size: 0.9rem;
   }
-  #adminPanel th, #adminPanel td {
-    padding: 8px 10px;
-    border-bottom: 1px solid #ff650099;
-    text-align: center;
+  #results-table th {
+    background-color: #9c3600cc;
   }
-  #adminPanel th {
-    background: #7b0000;
+  .small-note {
+    font-size: 0.75rem;
+    opacity: 0.8;
+    font-style: italic;
   }
-  #logoutBtn {
-    background: #770000;
-    border: none;
-    color: white;
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 15px;
-    width: 100%;
-    transition: background-color 0.3s ease;
-  }
-  #logoutBtn:hover {
-    background: #aa0000;
+  #admin-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
-  /* Responsive */
-  @media (min-width: 720px) {
-    #container {
-      flex-direction: column;
-    }
+  /* Radio list for choices */
+  .radio-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  @media (max-width: 720px) {
+  .radio-group label {
+    background-color: #a63b00bb;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    flex: 1 0 100px;
+    text-align: center;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  .radio-group input[type=radio] {
+    display: none;
+  }
+  .radio-group input[type=radio]:checked + label {
+    background-color: #ff6300;
+    color: #fff8f0;
+    font-weight: 700;
+    box-shadow: 0 0 10px #ff6300bb;
+  }
+
+  /* Responsive and spacing */
+  @media (max-width: 500px) {
     #container {
-      /* stacked layout */
+      width: 100%;
+      padding: 1rem;
     }
   }
 </style>
 </head>
 <body>
-  <div id="container">
-    <h1>Polling Lomba Menggambar dan Mewarnai Pesta Gotilon 2025</h1>
-    <!-- Voting column -->
-    <section id="votingSection" aria-label="Polling Responden">
-      <div id="tokenInputGroup">
-        <input type="text" id="tokenInput" placeholder="Masukan Token Anda" aria-label="Token Voting" autocomplete="off" />
-        <button id="submitTokenBtn">Masuk</button>
-      </div>
+<h1>Polling Lomba Menggambar dan Mewarnai Pesta Gotilon 2025</h1>
+<div id="container">
+  <!-- Respondent Section -->
+  <section id="respondent-section" class="section">
+    <h2>Polling Responden</h2>
+    <div id="respondent-token-entry">
+      <form id="respondent-token-form">
+        <label for="token-input">Masukkan Token Anda:</label>
+        <input type="text" id="token-input" autocomplete="off" required placeholder="Token unik" />
+        <button type="submit">Masuk</button>
+      </form>
+      <p id="token-error" style="color:#ffb1b1;display:none;margin-top:0.4rem;text-align:center;"></p>
+    </div>
+    <div id="respondent-vote-area" style="display:none;">
+      <form id="respondent-vote-form">
+        <label>Pilih Lomba:</label>
+        <div class="radio-group" id="competition-choice">
+          <input type="radio" id="mewarnai" name="competition" value="Mewarnai" required />
+          <label for="mewarnai">Mewarnai</label>
 
-      <div id="pollingChoice" aria-label="Pilih Lomba">
-        <button data-poll="Mewarnai">Mewarnai</button>
-        <button data-poll="Menggambar">Menggambar</button>
-      </div>
-
-      <div id="sectorChoice" aria-label="Pilih Sektor">
-        <p>Pilih Sektor untuk Voting:</p>
-        <div id="sectorButtonsContainer">
-          <!-- Buttons for Sektor 1 to 7 will be generated here -->
+          <input type="radio" id="menggambar" name="competition" value="Menggambar" />
+          <label for="menggambar">Menggambar</label>
         </div>
+        <label>Pilih Sektor:</label>
+        <div class="radio-group" id="sector-choice">
+          <input type="radio" id="sektor1" name="sector" value="Sektor 1" required />
+          <label for="sektor1">Sektor 1</label>
+
+          <input type="radio" id="sektor2" name="sector" value="Sektor 2" />
+          <label for="sektor2">Sektor 2</label>
+
+          <input type="radio" id="sektor3" name="sector" value="Sektor 3" />
+          <label for="sektor3">Sektor 3</label>
+
+          <input type="radio" id="sektor4" name="sector" value="Sektor 4" />
+          <label for="sektor4">Sektor 4</label>
+
+          <input type="radio" id="sektor5" name="sector" value="Sektor 5" />
+          <label for="sektor5">Sektor 5</label>
+
+          <input type="radio" id="sektor6" name="sector" value="Sektor 6" />
+          <label for="sektor6">Sektor 6</label>
+
+          <input type="radio" id="sektor7" name="sector" value="Sektor 7" />
+          <label for="sektor7">Sektor 7</label>
+        </div>
+        <button type="submit">Kirim Vote</button>
+      </form>
+    </div>
+    <p id="vote-confirm" style="color:#a8ffb1;display:none;margin-top:0.6rem;text-align:center;font-weight:600;">Terima kasih atas partisipasi Anda!</p>
+  </section>
+
+  <!-- Admin Section -->
+  <section id="admin-section" class="section">
+    <h2>Admin Panel</h2>
+
+    <div id="admin-login-area">
+      <form id="admin-login-form">
+        <label for="admin-password-input">Password Admin:</label>
+        <input type="password" id="admin-password-input" autocomplete="off" required placeholder="Masukkan password"/>
+        <button type="submit">Login</button>
+      </form>
+      <p id="admin-login-error" style="color:#ffb1b1;display:none;margin-top:0.4rem;text-align:center;"></p>
+    </div>
+
+    <div id="admin-panel" style="display:none;">
+      <div id="admin-actions">
+        <button id="generate-token-btn" title="Buat token acak baru">Buat Token Random</button>
+        <button id="export-data-btn" title="Ekspor data token & vote JSON">Ekspor Data JSON</button>
+        <button id="import-data-btn" title="Impor data JSON (salin tempel) dari file/data lama">Impor Data JSON</button>
+        <button id="admin-logout-btn" style="background:#a03000;" title="Logout Admin">Logout</button>
       </div>
 
-      <div id="message" role="alert" aria-live="polite"></div>
-    </section>
-
-    <!-- Admin column -->
-    <section id="adminSection" aria-label="Zona Admin">
-      <div id="adminLoginForm">
-        <input type="password" id="adminPassword" placeholder="Masukan password admin" aria-label="Password Admin" autocomplete="off" />
-        <button id="loginAdminBtn">Login</button>
-        <div id="adminLoginMessage" style="margin-top:8px; font-weight:600; color:#ffb3a7;"></div>
+      <div style="margin-top:1rem; max-height: 150px; overflow-y:auto; background:#7f240044; border-radius:8px; padding:0.6rem; box-shadow: inset 0 0 7px #ff630099;">
+        <strong>Daftar Token (status):</strong>
+        <ul id="tokens-list" aria-live="polite" aria-relevant="additions"></ul>
       </div>
 
-      <div id="adminPanel" style="display:none;">
-        <h2>Panel Admin</h2>
-        <button id="generateTokenBtn" title="Buat Token Random Baru">Buat Token Baru</button>
-        <button id="logoutBtn">Log Out</button>
-        <h3>Daftar Token</h3>
-        <table aria-label="Daftar Token">
-          <thead>
-            <tr><th>Token</th><th>Status</th></tr>
-          </thead>
-          <tbody id="tokensTableBody"></tbody>
-        </table>
-
-        <h3>Hasil Voting</h3>
-        <table aria-label="Hasil Voting">
+      <div style="margin-top:1rem;">
+        <strong>Hasil Pemungutan Suara:</strong>
+        <table id="results-table" aria-label="Hasil Voting">
           <thead>
             <tr>
               <th>Lomba</th>
-              <th>Sektor 1</th><th>Sektor 2</th><th>Sektor 3</th><th>Sektor 4</th>
-              <th>Sektor 5</th><th>Sektor 6</th><th>Sektor 7</th>
+              <th>Sektor 1</th>
+              <th>Sektor 2</th>
+              <th>Sektor 3</th>
+              <th>Sektor 4</th>
+              <th>Sektor 5</th>
+              <th>Sektor 6</th>
+              <th>Sektor 7</th>
             </tr>
           </thead>
-          <tbody id="resultsTableBody"></tbody>
+          <tbody id="results-body">
+          </tbody>
         </table>
       </div>
-    </section>
-  </div>
+
+      <p class="small-note" style="margin-top:0.5rem; text-align:center;">
+        Data tersimpan di browser. To share, gunakan tombol ekspor dan impor data JSON.
+      </p>
+      <textarea id="import-export-area" placeholder="Tempel data di sini untuk impor" style="margin-top:0.8rem; width: 100%; height: 6rem; border-radius: 8px; resize: vertical; padding: 0.5rem; display:none;"></textarea>
+      <button id="confirm-import-btn" style="display:none; margin-top: 0.4rem;">Konfirmasi Impor Data</button>
+    </div>
+  </section>
+</div>
 
 <script>
 (() => {
-  // Constants & Storage Keys
-  const ADMIN_PASSWORD = 'semutsektor32025';
-  const TOKENS_KEY = 'polling_tokens_gotilon_2025';
-  const VOTES_KEY = 'polling_votes_gotilon_2025';
-  const ADMIN_LOGGED_KEY = 'polling_admin_logged_gotilon_2025';
+  const TOKEN_STORAGE = 'gotilon2025_tokens';
+  const VOTE_STORAGE = 'gotilon2025_votes';
+  const ADMIN_SESSION_KEY = 'gotilon2025_admin_logged';
 
-  // Elements
-  const tokenInput = document.getElementById('tokenInput');
-  const submitTokenBtn = document.getElementById('submitTokenBtn');
-  const pollingChoice = document.getElementById('pollingChoice');
-  const sectorChoice = document.getElementById('sectorChoice');
-  const sectorButtonsContainer = document.getElementById('sectorButtonsContainer');
-  const messageBox = document.getElementById('message');
+  // Elements - Respondent
+  const respondentTokenEntry = document.getElementById('respondent-token-entry');
+  const respondentTokenForm = document.getElementById('respondent-token-form');
+  const tokenInput = document.getElementById('token-input');
+  const tokenError = document.getElementById('token-error');
 
-  const adminLoginForm = document.getElementById('adminLoginForm');
-  const adminPasswordInput = document.getElementById('adminPassword');
-  const loginAdminBtn = document.getElementById('loginAdminBtn');
-  const adminLoginMessage = document.getElementById('adminLoginMessage');
-  const adminPanel = document.getElementById('adminPanel');
-  const generateTokenBtn = document.getElementById('generateTokenBtn');
-  const logoutBtn = document.getElementById('logoutBtn');
+  const respondentVoteArea = document.getElementById('respondent-vote-area');
+  const respondentVoteForm = document.getElementById('respondent-vote-form');
+  const voteConfirm = document.getElementById('vote-confirm');
 
-  const tokensTableBody = document.getElementById('tokensTableBody');
-  const resultsTableBody = document.getElementById('resultsTableBody');
+  // Elements - Admin
+  const adminLoginArea = document.getElementById('admin-login-area');
+  const adminLoginForm = document.getElementById('admin-login-form');
+  const adminPasswordInput = document.getElementById('admin-password-input');
+  const adminLoginError = document.getElementById('admin-login-error');
 
-  // State vars
+  const adminPanel = document.getElementById('admin-panel');
+  const generateTokenBtn = document.getElementById('generate-token-btn');
+  const tokensList = document.getElementById('tokens-list');
+  const resultsBody = document.getElementById('results-body');
+
+  const exportDataBtn = document.getElementById('export-data-btn');
+  const importDataBtn = document.getElementById('import-data-btn');
+  const importExportArea = document.getElementById('import-export-area');
+  const confirmImportBtn = document.getElementById('confirm-import-btn');
+  const adminLogoutBtn = document.getElementById('admin-logout-btn');
+
+  // Voting options constants
+  const competitions = ['Mewarnai', 'Menggambar'];
+  const sectors = ['Sektor 1', 'Sektor 2', 'Sektor 3', 'Sektor 4', 'Sektor 5', 'Sektor 6', 'Sektor 7'];
+
+  // State
+  let tokens = {};
+  let votes = {};
   let currentToken = null;
-  let currentPollChoice = null;
+  let adminLoggedIn = false;
 
-  // Utility functions
+  // --- Initialization ---
   function loadTokens() {
-    const data = localStorage.getItem(TOKENS_KEY);
-    if (!data) return {};
     try {
-      return JSON.parse(data);
+      tokens = JSON.parse(localStorage.getItem(TOKEN_STORAGE)) || {};
     } catch {
-      return {};
+      tokens = {};
     }
   }
-  function saveTokens(tokens) {
-    localStorage.setItem(TOKENS_KEY, JSON.stringify(tokens));
+  function saveTokens() {
+    localStorage.setItem(TOKEN_STORAGE, JSON.stringify(tokens));
   }
+
   function loadVotes() {
-    const data = localStorage.getItem(VOTES_KEY);
-    if (!data) return {};
     try {
-      return JSON.parse(data);
+      votes = JSON.parse(localStorage.getItem(VOTE_STORAGE)) || {};
     } catch {
-      return {};
+      votes = {};
     }
   }
-  function saveVotes(votes) {
-    localStorage.setItem(VOTES_KEY, JSON.stringify(votes));
+  function saveVotes() {
+    localStorage.setItem(VOTE_STORAGE, JSON.stringify(votes));
   }
-  function setAdminLoggedIn(value) {
-    sessionStorage.setItem(ADMIN_LOGGED_KEY, value ? "true" : "false");
-  }
-  function isAdminLoggedIn() {
-    return sessionStorage.getItem(ADMIN_LOGGED_KEY) === "true";
-  }
-  function resetVotingUI() {
+
+  function resetRespondentViews() {
+    respondentTokenEntry.style.display = 'block';
+    tokenError.style.display = 'none';
+    respondentVoteArea.style.display = 'none';
+    voteConfirm.style.display = 'none';
+    respondentVoteForm.reset();
     tokenInput.value = '';
     currentToken = null;
-    currentPollChoice = null;
-    pollingChoice.style.display = 'none';
-    sectorChoice.style.display = 'none';
-    tokenInput.disabled = false;
-    submitTokenBtn.disabled = false;
-    messageBox.textContent = '';
   }
 
-  // Generate random token function (8 characters alphanumeric)
-  function generateRandomToken() {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result = '';
-    for(let i=0; i<8; i++) {
-      result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
-  }
-
-  // Show message box
-  function showMessage(text, isError=false) {
-    messageBox.textContent = text;
-    messageBox.style.color = isError ? '#ff9999' : '#bfffdf';
-  }
-
-  // Voting actions
-  submitTokenBtn.addEventListener('click', () => {
-    const token = tokenInput.value.trim();
-    if(token.length === 0) {
-      showMessage('Token harus diisi!', true);
-      return;
-    }
-    const tokens = loadTokens();
-    if (!(token in tokens)) {
-      showMessage('Token tidak ditemukan.', true);
-      return;
-    }
-    if (tokens[token] === 'used') {
-      showMessage('Token sudah pernah digunakan.', true);
-      return;
-    }
-    currentToken = token;
-    tokenInput.disabled = true;
-    submitTokenBtn.disabled = true;
-    showMessage('Token diterima. Silakan pilih lomba yang ingin dipolling:');
-    pollingChoice.style.display = 'block';
-  });
-
-  // When user selects "Mewarnai" or "Menggambar"
-  pollingChoice.addEventListener('click', e => {
-    if (e.target.tagName !== 'BUTTON') return;
-    currentPollChoice = e.target.getAttribute('data-poll');
-    if (!currentPollChoice) return;
-    pollingChoice.style.display = 'none';
-    // Show sectors
-    sectorButtonsContainer.innerHTML = '';
-    for(let i=1; i<=7; i++) {
-      const btn = document.createElement('button');
-      btn.textContent = 'Sektor ' + i;
-      btn.dataset.sektor = i;
-      sectorButtonsContainer.appendChild(btn);
-    }
-    sectorChoice.style.display = 'block';
-    showMessage(`Pilihan lomba: ${currentPollChoice}. Silakan pilih sektor.`);
-  });
-
-  // When user selects sector to vote
-  sectorChoice.addEventListener('click', e => {
-    if (e.target.tagName !== 'BUTTON') return;
-    const sektor = e.target.dataset.sektor;
-    if (!sektor || !currentToken || !currentPollChoice) return;
-
-    // Save vote
-    let votes = loadVotes();
-    if (!votes[currentPollChoice]) votes[currentPollChoice] = {};
-    votes[currentPollChoice][sektor] = (votes[currentPollChoice][sektor] || 0) + 1;
-    saveVotes(votes);
-
-    // Mark token as used
-    let tokens = loadTokens();
-    tokens[currentToken] = 'used';
-    saveTokens(tokens);
-
-    showMessage('Terima kasih sudah memilih! Voting Anda sudah tercatat.');
-    setTimeout(() => {
-      resetVotingUI();
-    }, 2500);
-  });
-
-  // Admin Login actions
-  loginAdminBtn.addEventListener('click', () => {
-    const pw = adminPasswordInput.value.trim();
-    if (pw === ADMIN_PASSWORD) {
-      setAdminLoggedIn(true);
-      adminLoginMessage.textContent = 'Berhasil login';
-      adminLoginMessage.style.color = '#aaffaa';
-      adminPasswordInput.value = '';
-      showAdminPanel();
-    } else {
-      adminLoginMessage.textContent = 'Password salah!';
-      adminLoginMessage.style.color = '#ff9999';
-    }
-  });
-
-  // Show admin panel
-  function showAdminPanel() {
-    adminLoginForm.style.display = 'none';
-    adminPanel.style.display = 'block';
-    renderTokensTable();
-    renderResultsTable();
-  }
-
-  // Hide admin panel and show login form
-  function hideAdminPanel() {
-    adminLoginForm.style.display = 'block';
+  function resetAdminViews() {
+    adminLoginArea.style.display = 'block';
     adminPanel.style.display = 'none';
-    adminLoginMessage.textContent = '';
-    setAdminLoggedIn(false);
+    adminPasswordInput.value = '';
+    adminLoginError.style.display = 'none';
   }
 
-  // Generate token button
-  generateTokenBtn.addEventListener('click', () => {
-    let tokens = loadTokens();
-    // Generate a token that does not exist yet
-    let newToken;
-    do {
-      newToken = generateRandomToken();
-    } while(newToken in tokens);
-    tokens[newToken] = 'unused';
-    saveTokens(tokens);
-    renderTokensTable();
-  });
-
-  // Render tokens table
-  function renderTokensTable() {
-    let tokens = loadTokens();
-    tokensTableBody.innerHTML = '';
+  function renderTokenList() {
+    tokensList.innerHTML = '';
     if (Object.keys(tokens).length === 0) {
-      tokensTableBody.innerHTML = '<tr><td colspan="2">Belum ada token.</td></tr>';
+      tokensList.innerHTML = '<li>Tidak ada token yang dibuat.</li>';
       return;
     }
-    for (const [token, status] of Object.entries(tokens)) {
-      const tr = document.createElement('tr');
-      const tokenTd = document.createElement('td');
-      tokenTd.textContent = token;
-      const statusTd = document.createElement('td');
-      statusTd.textContent = status === 'used' ? 'Sudah Digunakan' : 'Belum Digunakan';
-      statusTd.style.color = status === 'used' ? '#ff7f7f' : '#aaffaa';
-      tr.appendChild(tokenTd);
-      tr.appendChild(statusTd);
-      tokensTableBody.appendChild(tr);
-    }
+    const ul = document.createElement('ul');
+    Object.entries(tokens).forEach(([token, used]) => {
+      const li = document.createElement('li');
+      li.textContent = token + ' — ' + (used ? 'Sudah Digunakan' : 'Belum Digunakan');
+      li.style.color = used ? '#a8ffb1' : '#ffb1b1';
+      ul.appendChild(li);
+    });
+    tokensList.appendChild(ul);
   }
 
-  // Render results table
-  function renderResultsTable() {
-    let votes = loadVotes();
-    // Clear tbody
-    resultsTableBody.innerHTML = '';
-
-    ['Mewarnai', 'Menggambar'].forEach(lomba => {
-      const tr = document.createElement('tr');
-      const lombaTd = document.createElement('td');
-      lombaTd.textContent = lomba;
-      tr.appendChild(lombaTd);
-      for(let i=1; i<=7; i++) {
-        const td = document.createElement('td');
-        const count = votes?.[lomba]?.[i]?.toString() || '0';
-        td.textContent = count;
-        tr.appendChild(td);
+  function renderResults() {
+    // Initialize results data with zeros for each competition-sector
+    const resultData = {};
+    competitions.forEach(comp => {
+      resultData[comp] = {};
+      sectors.forEach(sec => {
+        resultData[comp][sec] = 0;
+      });
+    });
+    // Aggregate votes counts
+    Object.values(votes).forEach(vote => {
+      if (resultData[vote.competition] && resultData[vote.competition][vote.sector] !== undefined) {
+        resultData[vote.competition][vote.sector]++;
       }
-      resultsTableBody.appendChild(tr);
+    });
+
+    resultsBody.innerHTML = '';
+    competitions.forEach(comp => {
+      const tr = document.createElement('tr');
+      const tdComp = document.createElement('td');
+      tdComp.textContent = comp;
+      tdComp.style.fontWeight = '600';
+      tr.appendChild(tdComp);
+      sectors.forEach(sec => {
+        const td = document.createElement('td');
+        td.textContent = resultData[comp][sec];
+        tr.appendChild(td);
+      });
+      resultsBody.appendChild(tr);
     });
   }
 
-  // Log out action
-  logoutBtn.addEventListener('click', () => {
-    hideAdminPanel();
+  // Helper: generate random token string (8 uppercase alphanumeric)
+  function generateRandomToken() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let token = '';
+    for (let i = 0; i < 8; i++) {
+      token += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return token;
+  }
+
+  // Admin login check
+  function checkAdminSession() {
+    adminLoggedIn = (localStorage.getItem(ADMIN_SESSION_KEY) === 'true');
+    if (adminLoggedIn) {
+      adminLoginArea.style.display = 'none';
+      adminPanel.style.display = 'flex';
+      renderTokenList();
+      renderResults();
+    } else {
+      resetAdminViews();
+    }
+  }
+
+  // --- Event Handlers ---
+
+  // Respondent enters token
+  respondentTokenForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const tokenVal = tokenInput.value.trim().toUpperCase();
+    if (!tokenVal) return;
+    if (!(tokenVal in tokens)) {
+      tokenError.textContent = 'Token tidak valid.';
+      tokenError.style.display = 'block';
+      return;
+    }
+    if (tokens[tokenVal]) {
+      tokenError.textContent = 'Token sudah digunakan.';
+      tokenError.style.display = 'block';
+      return;
+    }
+    // Token valid and unused
+    tokenError.style.display = 'none';
+    currentToken = tokenVal;
+    // Hide token input, show vote
+    respondentTokenEntry.style.display = 'none';
+    respondentVoteArea.style.display = 'block';
   });
 
-  // On load check if admin is logged in
-  function init() {
-    if (isAdminLoggedIn()) {
-      showAdminPanel();
-    } else {
-      hideAdminPanel();
+  // Respondent submits vote
+  respondentVoteForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!currentToken) {
+      tokenError.textContent = 'Token tidak dikenali. Silakan mulai ulang.';
+      tokenError.style.display = 'block';
+      resetRespondentViews();
+      return;
     }
-    resetVotingUI();
-  }
-  init();
+    const competition = respondentVoteForm.elements['competition'].value;
+    const sector = respondentVoteForm.elements['sector'].value;
+    if (!competition || !sector) return;
 
+    // Save vote
+    votes[currentToken] = { competition, sector };
+    saveVotes();
+
+    // Mark token as used
+    tokens[currentToken] = true;
+    saveTokens();
+
+    voteConfirm.style.display = 'block';
+
+    // Reset to token screen after a short delay
+    setTimeout(() => {
+      resetRespondentViews();
+    }, 2500);
+  });
+
+  // Admin login submit
+  adminLoginForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const pass = adminPasswordInput.value.trim();
+    if (pass === 'semutsektor32025') {
+      localStorage.setItem(ADMIN_SESSION_KEY, 'true');
+      checkAdminSession();
+    } else {
+      adminLoginError.textContent = 'Password salah.';
+      adminLoginError.style.display = 'block';
+    }
+  });
+
+  // Admin logout click
+  adminLogoutBtn.addEventListener('click', () => {
+    localStorage.removeItem(ADMIN_SESSION_KEY);
+    adminLoggedIn = false;
+    resetAdminViews();
+  });
+
+  // Generate token click
+  generateTokenBtn.addEventListener('click', () => {
+    // Generate a new unused token, add to tokens object
+    let tries = 0;
+    let newToken = '';
+    do {
+      newToken = generateRandomToken();
+      tries++;
+      // Prevent infinite loop
+      if (tries > 100) break;
+    } while(newToken in tokens);
+
+    if (newToken) {
+      tokens[newToken] = false;
+      saveTokens();
+      renderTokenList();
+      alert('Token baru dibuat: ' + newToken + '\nSalin dan bagikan ke responden.');
+    }
+  });
+
+  // Export data click
+  exportDataBtn.addEventListener('click', () => {
+    const dataExport = {
+      tokens,
+      votes
+    };
+    const jsonStr = JSON.stringify(dataExport, null, 2);
+    // Show JSON text area for copying
+    importExportArea.value = jsonStr;
+    importExportArea.style.display = 'block';
+    confirmImportBtn.style.display = 'none';
+    importExportArea.focus();
+    importExportArea.select();
+  });
+
+  // Import data click
+  importDataBtn.addEventListener('click', () => {
+    importExportArea.value = '';
+    importExportArea.style.display = 'block';
+    confirmImportBtn.style.display = 'inline-block';
+    importExportArea.focus();
+  });
+
+  // Confirm import click
+  confirmImportBtn.addEventListener('click', () => {
+    const rawData = importExportArea.value.trim();
+    if (!rawData) {
+      alert('Data impor tidak boleh kosong.');
+      return;
+    }
+    try {
+      const parsed = JSON.parse(rawData);
+      if (typeof parsed !== 'object' || !parsed.tokens || !parsed.votes) {
+        alert('Format data tidak sesuai.');
+        return;
+      }
+      tokens = parsed.tokens;
+      votes = parsed.votes;
+      saveTokens();
+      saveVotes();
+      renderTokenList();
+      renderResults();
+      importExportArea.style.display = 'none';
+      confirmImportBtn.style.display = 'none';
+      alert('Data berhasil diimpor.');
+    } catch {
+      alert('Gagal mengimpor data. Pastikan format JSON benar.');
+    }
+  });
+
+  // Initial startup
+  function startup() {
+    loadTokens();
+    loadVotes();
+    checkAdminSession();
+    resetRespondentViews();
+  }
+
+  startup();
 })();
 </script>
 </body>
 </html>
+
+
 
