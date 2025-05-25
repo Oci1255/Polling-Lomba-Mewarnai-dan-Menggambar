@@ -1,154 +1,511 @@
-   <!DOCTYPE html>
-   <html lang="id">
-   <head>
-       <meta charset="UTF-8">
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <title>Polling Lomba Menggambar dan Mewarnai Pesta Gotilon 2025</title>
-       <style>
-           body {
-               font-family: Arial, sans-serif;
-               background: linear-gradient(135deg, #6b0a0a, #ff6f00);
-               color: white;
-               padding: 20px;
-           }
-           header {
-               text-align: center;
-               margin-bottom: 20px;
-           }
-           section {
-               margin-bottom: 20px;
-               padding: 20px;
-               background: rgba(255, 255, 255, 0.1);
-               border-radius: 10px;
-           }
-           button {
-               padding: 10px 15px;
-               background: #b23105;
-               border: none;
-               border-radius: 5px;
-               color: white;
-               cursor: pointer;
-           }
-           button:hover {
-               background: #ff6f00;
-           }
-           .hidden {
-               display: none;
-           }
-       </style>
-   </head>
-   <body>
-       <header>
-           <h1>Polling Lomba Menggambar dan Mewarnai Pesta Gotilon 2025</h1>
-       </header>
-       <main>
-           <section id="respondent-section">
-               <h2>Voting Responden</h2>
-               <input type="text" id="token-input" placeholder="Masukkan Token">
-               <button id="token-verify-btn">Verifikasi Token</button>
-               <div id="token-message"></div>
-               <div id="contest-choice" class="hidden">
-                   <h3>Pilih Lomba</h3>
-                   <select id="contest-select">
-                       <option value="" disabled selected>-- Pilih Lomba --</option>
-                       <option value="Mewarnai">Mewarnai</option>
-                       <option value="Menggambar">Menggambar</option>
-                   </select>
-                   <h4>Pilih Sektor</h4>
-                   <select id="sector-select">
-                       <option value="" disabled selected>-- Pilih Sektor --</option>
-                       <option value="Sektor 1">Sektor 1</option>
-                       <option value="Sektor 2">Sektor 2</option>
-                       <option value="Sektor 3">Sektor 3</option>
-                       <option value="Sektor 4">Sektor 4</option>
-                       <option value="Sektor 5">Sektor 5</option>
-                       <option value="Sektor 6">Sektor 6</option>
-                       <option value="Sektor 7">Sektor 7</option>
-                   </select>
-                   <button id="vote-submit-btn">Submit Vote</button>
-                   <div id="vote-message"></div>
-               </div>
-           </section>
-           <section id="admin-section">
-               <h2>Panel Admin</h2>
-               <input type="password" id="admin-password-input" placeholder="Password Admin">
-               <button id="admin-login-btn">Login</button>
-               <div id="admin-login-message"></div>
-               <div id="admin-panel" class="hidden">
-                   <button id="generate-token-btn">Buat Token Baru</button>
-                   <button id="get-tokens-btn">Dapatkan Token</button>
-                   <div id="token-list"></div>
-                   <button id="get-results-btn">Dapatkan Hasil Voting</button>
-                   <div id="results-list"></div>
-                   <button id="admin-logout-btn">Logout</button>
-               </div>
-           </section>
-       </main>
-       <script>
-           const API_URL = 'http://localhost:5000/api';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Polling Lomba Menggambar dan Mewarnai Pesta Gotilon 2025</title>
+<style>
+  /* Fonts and reset */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, #7b0000, #ff6f00);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  h1 {
+    margin: 0 0 20px 0;
+    font-weight: 600;
+    text-align: center;
+    text-shadow: 0 0 5px #440000;
+  }
+  .container {
+    max-width: 960px;
+    width: 100%;
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    box-shadow: 0 0 15px rgba(255,111,0,0.5);
+  }
+  /* Two columns vertical stacking on small screens */
+  .columns {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .column {
+    flex: 1 1 320px;
+    background: rgba(0,0,0,0.45);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px #ff6f00aa;
+  }
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  input[type="text"], input[type="password"], select {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    font-family: inherit;
+  }
+  button {
+    background: #ff6f00;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #330900;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #ff8f33;
+  }
+  .hidden {
+    display: none !important;
+  }
+  .message {
+    font-weight: 600;
+    margin-top: 10px;
+    color: #ffcc99;
+  }
+  .vote-options {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0 30px 0;
+    gap: 10px;
+  }
+  .vote-options button {
+    flex: 1;
+    padding: 12px 0;
+    font-weight: 700;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    background: linear-gradient(135deg, #a02800, #ff6f00);
+    color: white;
+  }
+  .vote-options button.active, .vote-options button:hover {
+    background: linear-gradient(135deg, #ff8f33, #ffaa55);
+    color: #330900;
+  }
+  .token-list {
+    max-height: 180px;
+    overflow-y: auto;
+    background: rgba(255, 111, 0, 0.15);
+    border-radius: 8px;
+    padding: 10px;
+    color: #ffeecc;
+  }
+  .token-list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #ff6f0040;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+  }
+  .token-status {
+    font-weight: 600;
+  }
+  .token-status.used {
+    color: #cc3300;
+  }
+  .token-status.unused {
+    color: #99ff99;
+  }
+  .admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logout-btn {
+    background: #990000;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #ffccbb;
+  }
+  .logout-btn:hover {
+    background: #cc2200;
+    color: #ffffff;
+  }
+  /* Responsive */
+  @media (max-width: 780px) {
+    .columns {
+      flex-direction: column;
+    }
+    .column {
+      flex: 1 1 100%;
+    }
+  }
+</style>
+</head>
+<body>
+<h1>Polling Lomba Menggambar dan Mewarnai Pesta Gotilon 2025</h1>
+<div class="container">
+  <div class="columns">
+    <!-- Respondent column -->
+    <div class="column" id="respondent-column">
+      <div id="respondent-token-section">
+        <label for="token-input">Masukkan Token untuk voting:</label>
+        <input type="text" id="token-input" placeholder="Token Anda" autocomplete="off" />
+        <button id="token-submit-btn">Masuk Voting</button>
+        <div class="message" id="token-message"></div>
+      </div>
+      <div id="voting-section" class="hidden">
+        <div>
+          <label for="category-select">Pilih Lomba:</label>
+          <select id="category-select">
+            <option value="" disabled selected>Pilih lomba</option>
+            <option value="mewarnai">Mewarnai</option>
+            <option value="menggambar">Menggambar</option>
+          </select>
+        </div>
+        <div id="sector-vote-section" class="hidden">
+          <label>Pilih Sektor untuk voting:</label>
+          <div class="vote-options" id="sector-buttons">
+            <!-- Buttons Sektor 1 to 7 dynamically inserted -->
+          </div>
+        </div>
+        <div class="message" id="vote-message"></div>
+      </div>
+    </div>
 
-           document.getElementById('token-verify-btn').addEventListener('click', async () => {
-               const token = document.getElementById('token-input').value;
-               const response = await fetch(`${API_URL}/tokens`);
-               const tokens = await response.json();
-               const validToken = tokens.find(t => t.token === token && !t.used);
-               if (validToken) {
-                   document.getElementById('token-message').textContent = 'Token valid!';
-                   document.getElementById('contest-choice').classList.remove('hidden');
-               } else {
-                   document.getElementById('token-message').textContent = 'Token tidak valid atau sudah digunakan.';
-               }
-           });
+    <!-- Admin column -->
+    <div class="column" id="admin-column">
+      <div id="admin-login-section">
+        <label for="admin-password-input">Masukkan Password Admin:</label>
+        <input type="password" id="admin-password-input" placeholder="Password Admin" autocomplete="off" />
+        <button id="admin-login-btn">Masuk Admin</button>
+        <div class="message" id="admin-login-message"></div>
+      </div>
+      <div id="admin-panel" class="hidden">
+        <div class="admin-header">
+          <h2>Panel Admin</h2>
+          <button class="logout-btn" id="admin-logout-btn" title="Logout from admin panel">Logout</button>
+        </div>
 
-           document.getElementById('vote-submit-btn').addEventListener('click', async () => {
-               const token = document.getElementById('token-input').value;
-               const contest = document.getElementById('contest-select').value;
-               const sector = document.getElementById('sector-select').value;
-               const response = await fetch(`${API_URL}/vote`, {
-                   method: 'POST',
-                   headers: { 'Content-Type': 'application/json' },
-                   body: JSON.stringify({ token, contest, sector })
-               });
-               const result = await response.json();
-               document.getElementById('vote-message').textContent = result.message || 'Vote berhasil!';
-           });
+        <section id="vote-results-section">
+          <h3>Hasil Polling</h3>
+          <div id="vote-results">
+            <!-- Vote counts will appear here -->
+          </div>
+        </section>
 
-           document.getElementById('admin-login-btn').addEventListener('click', async () => {
-               const password = document.getElementById('admin-password-input').value;
-               if (password === 'semutsektor32025') {
-                   document.getElementById('admin-panel').classList.remove('hidden');
-                   document.getElementById('admin-login-message').textContent = '';
-               } else {
-                   document.getElementById('admin-login-message').textContent = 'Password salah.';
-               }
-           });
+        <section id="token-manager-section" style="margin-top:20px;">
+          <h3>Manajemen Token</h3>
+          <button id="generate-token-btn">Buat Token Baru</button>
+          <div class="token-list" id="token-list">
+            <!-- Tokens and their status displayed here -->
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
 
-           document.getElementById('generate-token-btn').addEventListener('click', async () => {
-               const token = Math.random().toString(36).substring(2, 10).toUpperCase();
-               await fetch(`${API_URL}/tokens`, {
-                   method: 'POST',
-                   headers: { 'Content-Type': 'application/json' },
-                   body: JSON.stringify({ token })
-               });
-               alert(`Token baru: ${token}`);
-           });
+<script>
+// Data storage keys
+const TOKEN_STORAGE_KEY = 'polling_tokens';
+const VOTE_STORAGE_KEY = 'polling_votes';
+const ADMIN_SESSION_KEY = 'polling_admin_session';
 
-           document.getElementById('get-tokens-btn').addEventListener('click', async () => {
-               const response = await fetch(`${API_URL}/tokens`);
-               const tokens = await response.json();
-               document.getElementById('token-list').innerHTML = tokens.map(t => `<div>${t.token} - ${t.used ? 'Sudah dipakai' : 'Belum dipakai'}</div>`).join('');
-           });
+// Admin password
+const ADMIN_PASSWORD = 'semutsektor32025';
 
-           document.getElementById('get-results-btn').addEventListener('click', async () => {
-               const response = await fetch(`${API_URL}/results`);
-               const results = await response.json();
-               document.getElementById('results-list').innerHTML = results.map(r => `<div>${r._id.contest} - ${r._id.sector}: ${r.count}</div>`).join('');
-           });
+// Initialize tokens and votes if not exists
+function initializeStorage() {
+  if (!localStorage.getItem(TOKEN_STORAGE_KEY)) {
+    localStorage.setItem(TOKEN_STORAGE_KEY, JSON.stringify({}));
+  }
+  if (!localStorage.getItem(VOTE_STORAGE_KEY)) {
+    // votes structure: { mewarnai: { sektor1: 0, sektor2: 0, ..., sektor7: 0 }, menggambar: {...} }
+    const votes = {
+      mewarnai: {},
+      menggambar: {}
+    };
+    for (let i=1; i<=7; i++) {
+      votes.mewarnai['sektor' + i] = 0;
+      votes.menggambar['sektor' + i] = 0;
+    }
+    localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(votes));
+  }
+  if (!localStorage.getItem(ADMIN_SESSION_KEY)) {
+    localStorage.setItem(ADMIN_SESSION_KEY, 'false');
+  }
+}
 
-           document.getElementById('admin-logout-btn').addEventListener('click', () => {
-               document.getElementById('admin-panel').classList.add('hidden');
-           });
-       </script>
-   </body>
-   </html>
-   
+// Util: generate random token (8 chars alphanumeric uppercase)
+function generateRandomToken() {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // Avoid similar chars like I,O,1,0
+  let token = '';
+  for (let i = 0; i < 8; i++) {
+    token += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return token;
+}
+
+// Load tokens from storage (object of token->used boolean)
+function loadTokens() {
+  return JSON.parse(localStorage.getItem(TOKEN_STORAGE_KEY));
+}
+// Save tokens to storage
+function saveTokens(tokens) {
+  localStorage.setItem(TOKEN_STORAGE_KEY, JSON.stringify(tokens));
+}
+// Load votes from storage
+function loadVotes() {
+  return JSON.parse(localStorage.getItem(VOTE_STORAGE_KEY));
+}
+// Save votes to storage
+function saveVotes(votes) {
+  localStorage.setItem(VOTE_STORAGE_KEY, JSON.stringify(votes));
+}
+// Load admin session (true/false string)
+function loadAdminSession() {
+  return localStorage.getItem(ADMIN_SESSION_KEY) === 'true';
+}
+// Save admin session
+function saveAdminSession(value) {
+  localStorage.setItem(ADMIN_SESSION_KEY, value ? 'true' : 'false');
+}
+
+// DOM references
+const tokenInput = document.getElementById('token-input');
+const tokenSubmitBtn = document.getElementById('token-submit-btn');
+const tokenMessage = document.getElementById('token-message');
+const respondentTokenSection = document.getElementById('respondent-token-section');
+const votingSection = document.getElementById('voting-section');
+const categorySelect = document.getElementById('category-select');
+const sectorVoteSection = document.getElementById('sector-vote-section');
+const sectorButtonsContainer = document.getElementById('sector-buttons');
+const voteMessage = document.getElementById('vote-message');
+
+const adminPasswordInput = document.getElementById('admin-password-input');
+const adminLoginBtn = document.getElementById('admin-login-btn');
+const adminLoginMessage = document.getElementById('admin-login-message');
+const adminLoginSection = document.getElementById('admin-login-section');
+const adminPanel = document.getElementById('admin-panel');
+const adminLogoutBtn = document.getElementById('admin-logout-btn');
+
+const voteResultsDiv = document.getElementById('vote-results');
+const tokenListDiv = document.getElementById('token-list');
+
+let currentToken = null;
+
+// Initialization
+initializeStorage();
+updateAdminUI();
+
+// ----- Respondent flow -----
+
+// Verify token and allow voting
+tokenSubmitBtn.addEventListener('click', () => {
+  const enteredToken = tokenInput.value.trim().toUpperCase();
+  if (!enteredToken) {
+    tokenMessage.textContent = 'Mohon masukkan token.';
+    return;
+  }
+  const tokens = loadTokens();
+  if (!tokens.hasOwnProperty(enteredToken)) {
+    tokenMessage.textContent = 'Token tidak valid.';
+    return;
+  }
+  if (tokens[enteredToken] === true) {
+    tokenMessage.textContent = 'Token sudah digunakan.';
+    return;
+  }
+  // Valid token
+  currentToken = enteredToken;
+  tokenMessage.textContent = '';
+  respondentTokenSection.classList.add('hidden');
+  votingSection.classList.remove('hidden');
+  categorySelect.value = '';
+  sectorVoteSection.classList.add('hidden');
+  voteMessage.textContent = '';
+});
+
+// When category is selected, show sectors
+categorySelect.addEventListener('change', () => {
+  if (!categorySelect.value) {
+    sectorVoteSection.classList.add('hidden');
+    return;
+  }
+  // Render sector buttons if not already
+  if (sectorButtonsContainer.children.length === 0) {
+    for (let i = 1; i <= 7; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = `Sektor ${i}`;
+      btn.dataset.sektor = 'sektor' + i;
+      btn.type = 'button';
+      btn.addEventListener('click', () => submitVote(categorySelect.value, btn.dataset.sektor));
+      sectorButtonsContainer.appendChild(btn);
+    }
+  }
+  sectorVoteSection.classList.remove('hidden');
+  voteMessage.textContent = '';
+});
+
+// Submit vote for chosen category and sector
+function submitVote(category, sektor) {
+  if (!currentToken) {
+    voteMessage.textContent = 'Token tidak valid. Silakan mulai kembali.';
+    resetRespondentFlow();
+    return;
+  }
+  // Save vote
+  const votes = loadVotes();
+  if (votes[category] && typeof votes[category][sektor] === 'number') {
+    votes[category][sektor]++;
+  } else {
+    // Should not happen, but fallback
+    votes[category] = votes[category] || {};
+    votes[category][sektor] = 1;
+  }
+  saveVotes(votes);
+
+  // Mark token as used
+  const tokens = loadTokens();
+  tokens[currentToken] = true;
+  saveTokens(tokens);
+
+  voteMessage.textContent = 'Terima kasih telah memberikan suara!';
+  // Reset to start after short delay
+  setTimeout(() => {
+    resetRespondentFlow();
+  }, 1500);
+}
+
+// Reset respondent side to initial
+function resetRespondentFlow() {
+  currentToken = null;
+  tokenInput.value = '';
+  tokenMessage.textContent = '';
+  voteMessage.textContent = '';
+  categorySelect.value = '';
+  sectorVoteSection.classList.add('hidden');
+  votingSection.classList.add('hidden');
+  respondentTokenSection.classList.remove('hidden');
+}
+
+// ----- Admin flow -----
+
+// Update admin UI and controls visibility based on session
+function updateAdminUI() {
+  if (loadAdminSession()) {
+    adminLoginSection.classList.add('hidden');
+    adminPanel.classList.remove('hidden');
+    adminPasswordInput.value = '';
+    adminLoginMessage.textContent = '';
+    renderVoteResults();
+    renderTokenList();
+  } else {
+    adminLoginSection.classList.remove('hidden');
+    adminPanel.classList.add('hidden');
+  }
+}
+
+// Admin login
+adminLoginBtn.addEventListener('click', () => {
+  const enteredPassword = adminPasswordInput.value;
+  if (enteredPassword === ADMIN_PASSWORD) {
+    saveAdminSession(true);
+    updateAdminUI();
+  } else {
+    adminLoginMessage.textContent = 'Password salah.';
+  }
+});
+
+// Admin logout
+adminLogoutBtn.addEventListener('click', () => {
+  saveAdminSession(false);
+  updateAdminUI();
+});
+
+// Render voting results in admin panel
+function renderVoteResults() {
+  const votes = loadVotes();
+  voteResultsDiv.innerHTML = '';
+  ['mewarnai', 'menggambar'].forEach(category => {
+    const catTitle = category === 'mewarnai' ? 'Lomba Mewarnai' : 'Lomba Menggambar';
+    const catDiv = document.createElement('div');
+    catDiv.style.marginBottom = '15px';
+    const titleEl = document.createElement('h4');
+    titleEl.textContent = catTitle;
+    titleEl.style.borderBottom = '2px solid #ff6f00';
+    titleEl.style.paddingBottom = '3px';
+    catDiv.appendChild(titleEl);
+
+    for (let i = 1; i <= 7; i++) {
+      const sektorKey = 'sektor' + i;
+      const count = (votes[category] && votes[category][sektorKey]) || 0;
+      const p = document.createElement('p');
+      p.textContent = `Sektor ${i}: ${count} suara`;
+      p.style.margin = '4px 0';
+      catDiv.appendChild(p);
+    }
+    voteResultsDiv.appendChild(catDiv);
+  });
+}
+
+// Render token list in admin panel
+function renderTokenList() {
+  const tokens = loadTokens();
+  tokenListDiv.innerHTML = '';
+  if (Object.keys(tokens).length === 0) {
+    tokenListDiv.textContent = 'Belum ada token dibuat.';
+    return;
+  }
+  for (const [token, used] of Object.entries(tokens)) {
+    const div = document.createElement('div');
+    div.className = 'token-list-item';
+    const tokenSpan = document.createElement('span');
+    tokenSpan.textContent = token;
+    const statusSpan = document.createElement('span');
+    statusSpan.textContent = used ? 'Sudah dipakai' : 'Belum dipakai';
+    statusSpan.className = 'token-status ' + (used ? 'used' : 'unused');
+    div.appendChild(tokenSpan);
+    div.appendChild(statusSpan);
+    tokenListDiv.appendChild(div);
+  }
+}
+
+// Admin generate new token
+document.getElementById('generate-token-btn').addEventListener('click', () => {
+  const tokens = loadTokens();
+  let newToken = generateRandomToken();
+  // Ensure uniqueness
+  while (tokens.hasOwnProperty(newToken)) {
+    newToken = generateRandomToken();
+  }
+  tokens[newToken] = false; // unused
+  saveTokens(tokens);
+  renderTokenList();
+});
+
+// On page load, if admin already logged in, show admin panel
+updateAdminUI();
+
+</script>
+</body>
+</html>
+
